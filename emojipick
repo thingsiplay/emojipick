@@ -25,6 +25,7 @@ if [ ! -f "$file_check_program" ]; then
         if ! command -v "$1" &> /dev/null
         then
             echo "$1 could not be found"
+            rm -f -I "$file_check_program"
             exit
         fi
     }
