@@ -60,8 +60,3 @@ Required are:
 
 If you want report a bug or have any questions, then [leave me a message](https://thingsiplay.game.blog/contact/) on my contact page.
 
-## Changelog
-
-### Version 0.1
-
-- initial release
