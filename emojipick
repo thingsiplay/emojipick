@@ -41,7 +41,7 @@ fi
 emoji=$("$emojiget" | dmenu -l 15 -fn "$font" | awk '{print $1}')
 
 if [[ "copy_to_clipboard" -eq 1 ]]; then
-    echo "$emoji" | xclip -selection clipboard
+    echo "$emoji" | xclip -rmlastnl -selection clipboard
 fi
 
 if [[ "show_notification" -eq 1 ]]; then
