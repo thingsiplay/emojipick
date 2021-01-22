@@ -1,0 +1,53 @@
+#!/usr/bin/bash
+
+# Copyright (c) 2021 Tuncay D.
+# MIT License, see LICENSE
+
+# Path to emojiget.py
+# If it is in current working directory or in same folder as emojipick,
+# then the path of emojiget can be just its filename.
+emojiget='emojiget.py'
+
+# Name-Size
+font="'Noto Color Emoji-18'"
+
+# 1=Yes, 0=No
+copy_to_clipboard=1
+show_notification=1
+print_emoji=1
+
+export SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+export PATH=.:$SCRIPT_DIR:$PATH
+
+file_check_program=/tmp/emojipick_check_program
+if [ ! -f "$file_check_program" ]; then
+    function check_program {
+        if ! command -v "$1" &> /dev/null
+        then
+            echo "$1 could not be found"
+            exit
+        fi
+    }
+    check_program emojiget.py
+    check_program python3
+    check_program awk
+    check_program dmenu
+    check_program xclip
+    check_program notify-send
+    touch "$file_check_program"
+fi
+
+emoji=$("$emojiget" | dmenu -l 15 -fn "$font" | awk '{print $1}')
+
+if [[ "copy_to_clipboard" -eq 1 ]]; then
+    echo "$emoji" | xclip -selection clipboard
+fi
+
+if [[ "show_notification" -eq 1 ]]; then
+    notify-send "$emoji"
+fi
+
+if [[ "print_emoji" -eq 1 ]]; then
+    echo "$emoji"
+fi
+
