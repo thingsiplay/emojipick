@@ -12,9 +12,17 @@ emojiget='emojiget.py'
 font="'Noto Color Emoji-18'"
 
 # 1=Yes, 0=No
+use_rofi=0
 copy_to_clipboard=1
 show_notification=1
 print_emoji=1
+
+if [[ "use_rofi" -eq 1 ]]
+then
+    dmenu_app='rofi -dmenu'
+else
+    dmenu_app='dmenu'
+fi
 
 export SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 export PATH=.:$SCRIPT_DIR:$PATH
@@ -32,23 +40,32 @@ if [ ! -f "$file_check_program" ]; then
     check_program "$emojiget"
     check_program python3
     check_program awk
-    check_program dmenu
     check_program xclip
     check_program notify-send
+    if [[ "use_rofi" -eq 1 ]]
+    then
+        check_program rofi
+    else
+        check_program dmenu
+    fi
     touch "$file_check_program"
 fi
 
-emoji=$("$emojiget" | dmenu -l 15 -fn "$font" | awk '{print $1}')
+emoji=$("$emojiget" | $dmenu_app -l 15 -fn "$font" | awk '{print $1}')
 
-if [[ "copy_to_clipboard" -eq 1 ]]; then
-    echo "$emoji" | xclip -rmlastnl -selection clipboard
+if [ ! -z "$emoji" ]
+then
+
+    if [[ "copy_to_clipboard" -eq 1 ]]; then
+        echo "$emoji" | xclip -rmlastnl -selection clipboard
+    fi
+
+    if [[ "show_notification" -eq 1 ]]; then
+        notify-send "$emoji"
+    fi
+
+    if [[ "print_emoji" -eq 1 ]]; then
+        echo "$emoji"
+    fi
+
 fi
-
-if [[ "show_notification" -eq 1 ]]; then
-    notify-send "$emoji"
-fi
-
-if [[ "print_emoji" -eq 1 ]]; then
-    echo "$emoji"
-fi
-
