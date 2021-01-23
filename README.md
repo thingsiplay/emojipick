@@ -4,7 +4,6 @@ Get a selection of emojis and pick one to copy to clipboard.
 
 - **Author**: Tuncay D.
 - **License**: [MIT License](LICENSE)
-- **Download**: [Github releases](https://github.com/thingsiplay/emojipick/releases)
 - **Source**: [Github source](https://github.com/thingsiplay/emojipick)
 
 ![dmenu](emojipick.png)
@@ -41,6 +40,12 @@ easy to customize (if you know how to deal with it). Or just put another
 program in the pipeline and modify its working with the regular Linux command
 line tools. It uses minimal programs like "dmenu" and "xclip".
 
+Alternatively you can use "rofi" now, instead of "dmenu". It is a drop in
+replacement, and works similar. For that install rofi and enable it by changing
+the line `use_rofi=0` to `use_rofi=1` in the file "emojipick". It solves 2
+problems I had with dmenu. 1. rofi supports colored emojis, 2. dmenu was a bit
+sluggish in my experience.
+
 The emojis and their description are downloaded from
 [gist.github.com/oliveratgithub/emojis.json](https://gist.github.com/oliveratgithub/0bf11a9aff0d6da7b46f1490f86a71eb) .
 
@@ -52,9 +57,11 @@ Required are:
 
 - python3
 - awk
-- dmenu
+- dmenu (not needed if rofi is enabled)
 - xclip
 - notify-send
+- rofi (only if enabled)
+
 
 ## Feedback
 
