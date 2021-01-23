@@ -9,7 +9,8 @@
 emojiget='emojiget.py'
 
 # Name-Size
-font="'Noto Color Emoji-18'"
+font_family='"Noto Color Emoji"'
+font_size="18"
 
 # 1=Yes, 0=No
 use_rofi=0
@@ -19,9 +20,11 @@ print_emoji=1
 
 if [[ "use_rofi" -eq 1 ]]
 then
-    dmenu_app='rofi -dmenu'
+    dmenu_app='rofi -dmenu -l 15 -font'
+    font="$font_family $font_size"
 else
-    dmenu_app='dmenu'
+    dmenu_app='dmenu -l 15 -fn'
+    font="$font_family-$font_size"
 fi
 
 export SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
@@ -51,7 +54,7 @@ if [ ! -f "$file_check_program" ]; then
     touch "$file_check_program"
 fi
 
-emoji=$("$emojiget" | $dmenu_app -l 15 -fn "$font" | awk '{print $1}')
+emoji=$("$emojiget" | $dmenu_app "$font" | awk '{print $1}')
 
 if [ ! -z "$emoji" ]
 then
