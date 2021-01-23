@@ -29,7 +29,7 @@ if [ ! -f "$file_check_program" ]; then
             exit
         fi
     }
-    check_program emojiget.py
+    check_program "$emojiget"
     check_program python3
     check_program awk
     check_program dmenu
