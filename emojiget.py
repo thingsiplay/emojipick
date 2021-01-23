@@ -48,11 +48,7 @@ else:
         jfile.write_text(jtext)
 
     emojis = json.loads(jtext)
-    filtered_emojis = []
-    for emoji in emojis['emojis']:
-        if emoji['order'] != '':
-            filtered_emojis.append(emoji)
-    emojis['emojis'] = filtered_emojis
+    emojis['emojis'] = [em for em in emojis['emojis'] if em['order'] != '']
     jfile_filtered.write_text(json.dumps(emojis))
 
 for index, emoji in enumerate(emojis['emojis']):
