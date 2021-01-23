@@ -6,27 +6,33 @@ Get a selection of emojis and pick one to copy to clipboard.
 - **License**: [MIT License](LICENSE)
 - **Source**: [Github source](https://github.com/thingsiplay/emojipick)
 
-![dmenu](emojipick.png)
-
 ## Introduction
 
 Are you tired of the preinstalled Emoji tools that comes or does not come with
 your distro and you wish to use a different one? Yeah, me neither. Here is it
 anyway.
 
+![dmenu](emojipick.png)
+
 ## Usage
 
-On first run it will download the emoji data from github. This is only needed
-once. On execution it will open a small bar on top of your display with a
-selection of emojis. You can filter and narrow down a few of them. Use arrow
-keys to navigate through the list. If an emoji is selected via Enter key, it
-will be copied to clipboard and a little notification appears.
+On first run a small file from Github will be downloaded, containing the emoji
+data. This is needed only once. The script itself will open a small bar on top
+of the screen, with a list of smileys and other emojis. Type in something to
+filter and narrow down the selection. Use the arrow keys to navigate and
+Enter to select.
 
-My recommendation is to assign a shortcut to the script `emojipick` and call
-it from any place you need. It will copy the selected emoji to the clipboard.
-Alternatively you can also use it as a commandline tool. It will output to
-stdout too. There is not much to configure, just open the scripts itself and
-edit them as you like.
+On selection a notification will appear and the emoji is copied to clipboard.
+It is also send to stdout (echo in terminal). There is not much to configure,
+just open the script itself and edit them as you like. If you want use `rofi`
+instead of `dmenu`, there is a setting to enable it in `emojipick` file. For
+that install rofi and enable it by changing the line `use_rofi=0` to
+`use_rofi=1` in the file "emojipick". It solves 2 problems I had with dmenu. 1.
+rofi supports colored emojis, 2. dmenu was a bit sluggish in my experience.
+
+My recommendation is to assign a shortcut to the script `emojipick` and call it
+from any place you need. Alternatively you can also use it as a commandline
+tool, as it outputs to stdout.
 
 ## How it works
 
@@ -39,12 +45,6 @@ As these are little indipendent programs called after one another, it is very
 easy to customize (if you know how to deal with it). Or just put another
 program in the pipeline and modify its working with the regular Linux command
 line tools. It uses minimal programs like "dmenu" and "xclip".
-
-Alternatively you can use "rofi" now, instead of "dmenu". It is a drop in
-replacement, and works similar. For that install rofi and enable it by changing
-the line `use_rofi=0` to `use_rofi=1` in the file "emojipick". It solves 2
-problems I had with dmenu. 1. rofi supports colored emojis, 2. dmenu was a bit
-sluggish in my experience.
 
 The emojis and their description are downloaded from
 [gist.github.com/oliveratgithub/emojis.json](https://gist.github.com/oliveratgithub/0bf11a9aff0d6da7b46f1490f86a71eb) .
