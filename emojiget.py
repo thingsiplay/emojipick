@@ -57,7 +57,14 @@ else:
         jfile.write_text(jtext)
 
     emojis = json.loads(jtext)
+
+    # The alternate filter by "skin" compared to the "order" method will
+    # include more stuff in the end, but makes it very slow and unusable in
+    # dmenu. There is no problem in rofi, if you want switch. But remember
+    # to wipe the cache with -w option.
+    #emojis['emojis'] = [em for em in emojis['emojis'] if not 'skin' in em['name']]
     emojis['emojis'] = [em for em in emojis['emojis'] if em['order'] != '']
+
     jfile_filtered.write_text(json.dumps(emojis))
 
 if args.input and ifile.exists():
@@ -69,7 +76,7 @@ for index, emoji in enumerate(emojis['emojis']):
     if args.filter in emoji['name']:
         output += emoji['emoji']
         if not args.no_name:
-            output += ' ' + emoji['name']
+            output += ' ' + emoji['name'] + ' ~ ' + emoji['category']
         if args.limit > 0 and index >= args.limit - 1:
             break
         output += '\n'
