@@ -51,11 +51,14 @@ else:
     emojis['emojis'] = [em for em in emojis['emojis'] if em['order'] != '']
     jfile_filtered.write_text(json.dumps(emojis))
 
+output = ''
 for index, emoji in enumerate(emojis['emojis']):
     if args.filter in emoji['name']:
-        if args.no_name:
-            print(emoji['emoji'])
-        else:
-            print(emoji['emoji'], emoji['name'])
-        if args.limit > 0 and index > args.limit:
+        output += emoji['emoji']
+        if not args.no_name:
+            output += ' ' + emoji['name']
+        elif args.limit > 0 and index > args.limit:
             break
+        output += '\n'
+if output:
+    print(output)
