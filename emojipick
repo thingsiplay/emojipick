@@ -45,7 +45,6 @@ if [[ "$enable_favorites" -eq 1 ]]
 then
     emoptions="$emoptions --input $favorites"
 fi
-echo \""$emoptions"\"
 
 file_check_program=/tmp/emojipick_check_program
 if [ ! -f "$file_check_program" ]; then
