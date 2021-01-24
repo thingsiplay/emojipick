@@ -17,8 +17,12 @@ use_rofi=0
 copy_to_clipboard=1
 show_notification=1
 print_emoji=1
+lower_case=1
 
-if [[ "use_rofi" -eq 1 ]]
+export SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+export PATH=.:$SCRIPT_DIR:$PATH
+
+if [[ "$use_rofi" -eq 1 ]]
 then
     dmenu_app='rofi -dmenu -l 15 -font'
     font="$font_family $font_size"
@@ -27,8 +31,11 @@ else
     font="$font_family-$font_size"
 fi
 
-export SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
-export PATH=.:$SCRIPT_DIR:$PATH
+emoptions=""
+if [[ "$lower_case" -eq 1 ]]
+then
+    emoptions="$emoptions --lower-case"
+fi
 
 file_check_program=/tmp/emojipick_check_program
 if [ ! -f "$file_check_program" ]; then
@@ -45,7 +52,7 @@ if [ ! -f "$file_check_program" ]; then
     check_program awk
     check_program xclip
     check_program notify-send
-    if [[ "use_rofi" -eq 1 ]]
+    if [[ "$use_rofi" -eq 1 ]]
     then
         check_program rofi
     else
@@ -54,20 +61,20 @@ if [ ! -f "$file_check_program" ]; then
     touch "$file_check_program"
 fi
 
-emoji=$("$emojiget" | $dmenu_app "$font" | awk '{print $1}')
+emoji=$("$emojiget" $emoptions | $dmenu_app "$font" | awk '{print $1}')
 
 if [ ! -z "$emoji" ]
 then
 
-    if [[ "copy_to_clipboard" -eq 1 ]]; then
+    if [[ "$copy_to_clipboard" -eq 1 ]]; then
         echo "$emoji" | xclip -rmlastnl -selection clipboard
     fi
 
-    if [[ "show_notification" -eq 1 ]]; then
+    if [[ "$show_notification" -eq 1 ]]; then
         notify-send "$emoji"
     fi
 
-    if [[ "print_emoji" -eq 1 ]]; then
+    if [[ "$print_emoji" -eq 1 ]]; then
         echo "$emoji"
     fi
 
