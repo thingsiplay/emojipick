@@ -9,11 +9,6 @@ import json
 import urllib.request
 import argparse
 
-cdir = pathlib.Path('~/.cache/emojiget')
-cdir = cdir.expanduser()
-jfile = pathlib.Path(cdir / 'emoji.json')
-jfile_filtered = pathlib.Path(cdir / 'emoji_filtered.json')
-
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--filter', default='',
         help='print emoji only if name contains filter')
@@ -25,13 +20,25 @@ parser.add_argument('-w', '--wipe', default=False, action='store_true',
         help='delete temporary emoji files, redownload and recreate them')
 parser.add_argument('-c', '--lower-case', default=False, action='store_true',
         help='convert output to lower case only')
+parser.add_argument('-i', '--input',
+        help='path to file with additional newline separated content')
 args = parser.parse_args()
+
+cdir = pathlib.Path('~/.cache/emojiget')
+cdir = cdir.expanduser()
+jfile = pathlib.Path(cdir / 'emoji.json')
+jfile_filtered = pathlib.Path(cdir / 'emoji_filtered.json')
+ifile = ''
 
 if args.wipe:
     jfile.unlink(missing_ok=True)
     jfile_filtered.unlink(missing_ok=True)
     cdir.rmdir()
     sys.exit(0)
+
+if args.input:
+    ifile = pathlib.Path(args.input)
+    ifile = ifile.expanduser()
 
 if jfile_filtered.exists():
     jtext = jfile_filtered.read_text()
@@ -53,13 +60,17 @@ else:
     emojis['emojis'] = [em for em in emojis['emojis'] if em['order'] != '']
     jfile_filtered.write_text(json.dumps(emojis))
 
-output = ''
+if args.input and ifile.exists():
+    output = ifile.read_text()
+else:
+    output = ''
+
 for index, emoji in enumerate(emojis['emojis']):
     if args.filter in emoji['name']:
         output += emoji['emoji']
         if not args.no_name:
             output += ' ' + emoji['name']
-        elif args.limit > 0 and index > args.limit:
+        if args.limit > 0 and index >= args.limit - 1:
             break
         output += '\n'
 if args.lower_case:

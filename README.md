@@ -34,6 +34,17 @@ My recommendation is to assign a shortcut to the script `emojipick` and call it
 from any place you need. Alternatively you can also use it as a commandline
 tool, as it outputs to stdout.
 
+You can use a favorites file with your emojis, which will be displayed at top
+of the dmenu list. The default location is at `~/.myemojis` and should be
+formatted like:
+
+```
+❤️ name
+😂 name
+```
+
+The location of this file can be changed in the script `emojipick`.
+
 ## How it works
 
 The entire script is based on 2 parts, one Python program responsible for
