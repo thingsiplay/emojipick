@@ -73,6 +73,25 @@ Required are:
 - notify-send
 - rofi (only if enabled)
 
+### Additional files in use
+
+Additional to the scripts and required programs the following text files are
+in use:
+
+*created automatically*
+
+- `~/.cache/emojiget/emoji.json`
+- `~/.cache/emojiget/emoji_filtered.json`
+
+*optional user created data*
+
+- `~/.myemojis`
+
+*temporary, removed with system reboot*
+
+- `/tmp/emojipick_check_program`
+
+These are the default paths, if not customized.
 
 ## Feedback
 
