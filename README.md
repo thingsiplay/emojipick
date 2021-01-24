@@ -66,12 +66,17 @@ It does not require any installation of the script itself, just run
 `emojipick` script. A few little programs must be present on the machine.
 Required are:
 
-- python3
-- awk
-- dmenu (not needed if rofi is enabled)
-- xclip
-- notify-send
-- rofi (only if enabled)
+- `python3`
+- `awk`
+- `dmenu` (not needed if rofi is enabled)
+- `xclip`
+- `notify-send`
+- `rofi` (only if enabled)
+
+Default font "Noto Color Emoji", but can be changed:
+
+- `noto-fonts-emoji` (on Arch)
+- `fonts-noto-color-emoji` (on Debian)
 
 ### Additional files in use
 
