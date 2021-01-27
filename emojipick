@@ -70,17 +70,17 @@ if [ ! -f "$file_check_program" ]; then
     touch "$file_check_program"
 fi
 
-emoji=$("$emojiget" $emoptions | $dmenu_app "$font" | awk '{print $1}')
+emoji=$("$emojiget" $emoptions | $dmenu_app "$font" | tr '\n' ' ' | awk '{print $1}')
 
 if [ ! -z "$emoji" ]
 then
 
     if [[ "$copy_to_clipboard" -eq 1 ]]; then
-        echo "$emoji" | xclip -rmlastnl -selection clipboard
+        echo -n "$emoji" | xclip -rmlastnl -selection clipboard
     fi
 
     if [[ "$show_notification" -eq 1 ]]; then
-        notify-send "$emoji"
+        notify-send --urgency=low "$emoji"
     fi
 
     if [[ "$print_emoji" -eq 1 ]]; then
