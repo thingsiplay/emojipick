@@ -39,11 +39,14 @@ of the dmenu list. The default location is at `~/.myemojis` and should be
 formatted like:
 
 ```
-❤️ name
-😂 name
+💩 poop / imagination
+👉😎👈 this guy
+"very@important.org" email
 ```
 
-The location of this file can be changed in the script `emojipick`.
+It works with multiple emojis too. In fact, it even works with text until first
+space is encountered. The location of this file can be changed in the script
+`emojipick`.
 
 ## How it works
 
@@ -68,15 +71,22 @@ Required are:
 
 - `python3`
 - `awk`
-- `dmenu` (not needed if rofi is enabled)
+- `dmenu` or `rofi` (both can be installed, but only one required)
 - `xclip`
-- `notify-send`
-- `rofi` (only if enabled)
+- `notify-send` (libnotify)
 
 Default font "Noto Color Emoji", but can be changed:
 
 - `noto-fonts-emoji` (on Arch)
 - `fonts-noto-color-emoji` (on Debian)
+
+Single command to install all in one go in Arch based systems:
+
+- On Arch with rofi
+
+    ```
+    sudo pacman -Syu python3 awk rofi xclip libnotify noto-fonts-emoji
+    ```
 
 ### Additional files in use
 
