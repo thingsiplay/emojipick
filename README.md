@@ -48,6 +48,17 @@ It works with multiple emojis too. In fact, it even works with text until first
 space is encountered. The location of this file can be changed in the script
 `emojipick`.
 
+## Customize command
+
+If the environmental variable `EMOJIPICK_CMD` is set, then it's value is used
+to run the menu instead rofi or dmenu. This can be a path or full command with
+options. Here is an example:
+
+    EMOJIPICK_CMD='rofi -dmenu -l 5' ./emojipick
+
+Using any alternative program must be compatible with the options of rofi or
+dmenu.
+
 ## How it works
 
 The entire script is based on 2 parts, one Python program responsible for
