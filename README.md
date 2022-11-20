@@ -52,9 +52,11 @@ space is encountered. The location of this file can be changed in the script
 
 If the environmental variable `EMOJIPICK_CMD` is set, then it's value is used
 to run the menu instead rofi or dmenu. This can be a path or full command with
-options. Here is an example:
+options. Here some examples:
 
-    EMOJIPICK_CMD='rofi -dmenu -l 5' ./emojipick
+    $ EMOJIPICK_CMD='rofi -dmenu -l 5' ./emojipick
+    
+    $ EMOJIPICK_CMD='dmenu -fn' ./emojipick
 
 Using any alternative program must be compatible with the options of rofi or
 dmenu.
