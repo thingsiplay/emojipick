@@ -123,7 +123,6 @@ in use:
 
 These are the default paths, if not customized.
 
-## Feedback
+### See also
 
-If you want report a bug or have any questions, then [leave me a message](https://thingsiplay.game.blog/contact/) on my contact page.
-
+* https://github.com/thingsiplay/emojicherrypick
