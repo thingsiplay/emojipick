@@ -42,11 +42,13 @@ formatted like:
 💩 poop / imagination
 👉😎👈 this guy
 "very@important.org" email
+"Some long text with spaces" sentence with spaces
 ```
 
 It works with multiple emojis too. In fact, it even works with text until first
-space is encountered. The location of this file can be changed in the script
-`emojipick`.
+space is encountered. If the first character is a quote `"`, then the entire 
+content until closing quote is considered an emoji. This is useful if it contain 
+spaces. The location of this file can be changed in the script `emojipick`.
 
 ## Customize command
 
