@@ -20,7 +20,7 @@ use_rofi=0
 copy_to_clipboard=1
 show_notification=1
 print_emoji=1
-lower_case=1
+lower_case=0
 enable_favorites=1
 
 export SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
@@ -73,7 +73,17 @@ if [ ! -f "$file_check_program" ]; then
     touch "$file_check_program"
 fi
 
-emoji=$("$emojiget" $emoptions | $dmenu_app "$font" | tr '\n' ' ' | awk '{print $1}')
+emoji=$("$emojiget" $emoptions | $dmenu_app "$font" | tr '\n' ' ')
+
+# Does it start with a double quote?
+if [[ $emoji = \"* ]]
+then
+  # Select entire contents of quoted string
+  emoji=$(echo $emoji | awk -F '"' '{print $2}')
+else
+  # Select first field with awk default separator
+  emoji=$(echo $emoji | awk '{print $1}')
+fi
 
 if [ ! -z "$emoji" ]
 then
